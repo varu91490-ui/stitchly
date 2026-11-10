@@ -8,7 +8,7 @@ import { Truck, Calendar, CheckCircle2, Clock, AlertTriangle, PackageCheck } fro
 const TABS = [
   { key: 'today', label: 'ಇಂದು (Today)', icon: Calendar },
   { key: 'tomorrow', label: 'ನಾಳೆ (Tomorrow)', icon: Clock },
-  { key: 'overdue', label: 'ಮೀರಿದ ದಿನಾಂಕ (Overdue)', icon: AlertTriangle },
+  { key: 'overdue', label: 'ಮೀರಿದ ದಿನಾಂಕ', icon: AlertTriangle },
   { key: 'upcoming', label: 'ಮುಂಬರುವ ದಿನಗಳು', icon: Truck },
 ];
 
@@ -56,11 +56,11 @@ export const DeliveriesPage: React.FC = () => {
       
       {/* Title */}
       <div>
-        <h2 className="text-xl sm:text-2xl font-black text-gray-900 flex items-center space-x-2">
-          <Truck className="w-6 h-6 text-brand-700" />
+        <h2 className="text-xl sm:text-2xl font-black text-slate-900 flex items-center space-x-2">
+          <Truck className="w-6 h-6 text-violet-700" />
           <span>ವಿತರಣಾ ನಿರ್ವಹಣೆ (Deliveries)</span>
         </h2>
-        <p className="text-xs text-gray-500 font-medium">ಗ್ರಾಹಕರಿಗೆ ನೀಡಬೇಕಾದ ಬಟ್ಟೆಗಳ ದಿನಾಂಕ ಮತ್ತು ಸ್ಥಿತಿ</p>
+        <p className="text-xs text-slate-500 font-semibold">ಗ್ರಾಹಕರಿಗೆ ನೀಡಬೇಕಾದ ಬಟ್ಟೆಗಳ ದಿನಾಂಕ ಮತ್ತು ಸ್ಥಿತಿ</p>
       </div>
 
       {/* Filter Tabs */}
@@ -72,10 +72,10 @@ export const DeliveriesPage: React.FC = () => {
             <button
               key={t.key}
               onClick={() => setActiveTab(t.key)}
-              className={`py-3 px-3 rounded-2xl border text-xs sm:text-sm font-bold flex items-center justify-center space-x-1.5 transition-all shadow-sm ${
+              className={`py-3 px-3 rounded-2xl border text-xs sm:text-sm font-black flex items-center justify-center space-x-1.5 transition-all shadow-sm ${
                 isActive
-                  ? 'bg-brand-700 text-white border-brand-800 shadow-md'
-                  : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
+                  ? 'bg-gradient-to-r from-violet-700 to-indigo-700 text-white border-violet-800 shadow-glow-violet'
+                  : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
               }`}
             >
               <Icon className="w-4 h-4" />
@@ -87,12 +87,14 @@ export const DeliveriesPage: React.FC = () => {
 
       {/* Orders List */}
       {loading ? (
-        <div className="py-12 text-center text-gray-400 font-bold">ಲೋಡ್ ಆಗುತ್ತಿದೆ...</div>
+        <div className="py-12 text-center text-slate-400 font-bold">ಲೋಡ್ ಆಗುತ್ತಿದೆ...</div>
       ) : orders.length === 0 ? (
-        <div className="bg-white rounded-2xl p-8 text-center border border-gray-200 shadow-sm space-y-2">
-          <PackageCheck className="w-12 h-12 text-emerald-500 mx-auto" />
-          <p className="text-gray-600 font-bold text-base">ಈ ವಿಭಾಗದಲ್ಲಿ ಯಾವುದೇ ಆರ್ಡರ್ ಇಲ್ಲ!</p>
-          <p className="text-xs text-gray-400">ಎಲ್ಲಾ ಬಟ್ಟೆಗಳು ಸಮಯಕ್ಕೆ ಸರಿಯಾಗಿ ವಿತರಿಸಲಾಗಿವೆ.</p>
+        <div className="bg-white rounded-3xl p-8 text-center border border-slate-200 shadow-sm space-y-2">
+          <div className="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mx-auto text-emerald-600">
+            <PackageCheck className="w-8 h-8" />
+          </div>
+          <p className="text-slate-800 font-black text-base">ಈ ವಿಭಾಗದಲ್ಲಿ ಯಾವುದೇ ಆರ್ಡರ್ ಇಲ್ಲ!</p>
+          <p className="text-xs text-slate-400 font-medium">ಎಲ್ಲಾ ಬಟ್ಟೆಗಳು ಸಮಯಕ್ಕೆ ಸರಿಯಾಗಿ ವಿತರಿಸಲಾಗಿವೆ.</p>
         </div>
       ) : (
         <div className="space-y-3">
@@ -101,17 +103,17 @@ export const DeliveriesPage: React.FC = () => {
             return (
               <div
                 key={o.id}
-                className="bg-white rounded-2xl p-4 border border-gray-200 shadow-sm space-y-3"
+                className="bg-white rounded-3xl p-4.5 border border-slate-200/80 shadow-sm space-y-3 hover:border-violet-200 transition-all"
               >
                 <div className="flex justify-between items-start">
                   <div>
                     <Link
                       to={`/customers/${o.customer_id}`}
-                      className="text-base font-extrabold text-gray-900 hover:text-brand-700 transition-colors"
+                      className="text-base font-black text-slate-900 hover:text-violet-700 transition-colors"
                     >
                       {o.customer_name}
                     </Link>
-                    <p className="text-xs text-gray-600 font-semibold mt-0.5">
+                    <p className="text-xs text-slate-600 font-semibold mt-0.5">
                       {o.items.map((it) => `${it.garment_name} (${it.quantity})`).join(', ')}
                     </p>
                   </div>
@@ -120,11 +122,11 @@ export const DeliveriesPage: React.FC = () => {
                   </span>
                 </div>
 
-                <div className="flex justify-between items-center text-xs text-gray-600 bg-gray-50 p-2.5 rounded-xl">
+                <div className="flex justify-between items-center text-xs text-slate-600 bg-slate-50 p-3 rounded-2xl">
                   <span>
-                    ವಿತರಣಾ ದಿನಾಂಕ: <strong className="text-gray-900">{o.expected_delivery_date ? new Date(o.expected_delivery_date).toLocaleDateString('kn-IN') : 'ನಿಗದಿಯಾಗಿಲ್ಲ'}</strong>
+                    ವಿತರಣಾ ದಿನಾಂಕ: <strong className="text-slate-900">{o.expected_delivery_date ? new Date(o.expected_delivery_date).toLocaleDateString('kn-IN') : 'ನಿಗದಿಯಾಗಿಲ್ಲ'}</strong>
                   </span>
-                  <span className="font-extrabold text-red-600">
+                  <span className="font-black text-rose-600">
                     ಬಾಕಿ: ₹{o.remaining_balance}
                   </span>
                 </div>
@@ -135,7 +137,7 @@ export const DeliveriesPage: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => handleMarkReady(o.id)}
-                      className="flex-1 py-2 bg-purple-100 hover:bg-purple-200 text-purple-800 rounded-xl text-xs font-bold transition-colors"
+                      className="flex-1 py-2.5 bg-violet-100 hover:bg-violet-200 text-violet-800 rounded-xl text-xs font-bold transition-colors"
                     >
                       ಸಿದ್ಧವಾಗಿದೆ ಎಂದು ಗುರುತಿಸಿ
                     </button>
@@ -144,15 +146,15 @@ export const DeliveriesPage: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => handleMarkDelivered(o.id)}
-                      className="flex-1 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow transition-colors flex items-center justify-center space-x-1"
+                      className="flex-1 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white rounded-xl text-xs font-black shadow-glow-emerald transition-all flex items-center justify-center space-x-1"
                     >
                       <CheckCircle2 className="w-3.5 h-3.5" />
-                      <span>ಗ್ರಾಹಕರಿಗೆ ನೀಡಲಾಗಿದೆ (Delivered)</span>
+                      <span>ಗ್ರಾಹಕರಿಗೆ ನೀಡಲಾಗಿದೆ</span>
                     </button>
                   )}
                   <Link
                     to={`/orders/${o.id}`}
-                    className="py-2 px-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl text-xs font-bold"
+                    className="py-2.5 px-3.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold"
                   >
                     ವಿವರ
                   </Link>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Mic, MicOff, Check, X, AlertCircle, RefreshCw, HelpCircle, Volume2, Plus, Trash2 } from 'lucide-react';
+import { Mic, MicOff, Check, X, AlertCircle, RefreshCw, HelpCircle, Volume2, Plus, Trash2, Sparkles } from 'lucide-react';
 import { useKannadaVoice } from '../hooks/useKannadaVoice';
 import { voiceService } from '../services/voice';
 import { VoiceParseResponse, ExtractedGarment, MatchedCustomer } from '../types';
@@ -157,41 +157,49 @@ export const VoiceAssistantModal: React.FC<VoiceAssistantModalProps> = ({ isOpen
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn">
-      <div className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden border border-red-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md animate-fadeIn">
+      <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden border border-violet-200">
         
         {/* Header */}
-        <div className="flex items-center justify-between px-5 py-4 bg-gradient-to-r from-brand-700 to-brand-600 text-white">
-          <div className="flex items-center space-x-2">
-            <Mic className="w-6 h-6 text-yellow-300" />
-            <h2 className="text-xl font-bold">ಕನ್ನಡ ಧ್ವನಿ ಸಹಾಯಕ</h2>
+        <div className="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-violet-950 via-indigo-900 to-purple-950 text-white border-b border-violet-800/40">
+          <div className="flex items-center space-x-2.5">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-400 to-orange-500 flex items-center justify-center shadow-glow-amber">
+              <Mic className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <h2 className="text-lg font-black tracking-wide flex items-center space-x-1.5">
+                <span>ಕನ್ನಡ ಧ್ವನಿ ಸಹಾಯಕ</span>
+                <Sparkles className="w-4 h-4 text-amber-300" />
+              </h2>
+              <p className="text-[11px] text-violet-200 font-medium">ಕನ್ನಡ ಅಥವಾ ಇಂಗ್ಲಿಷ್-ಕನ್ನಡ ಮಿಶ್ರಣದಲ್ಲಿ ಮಾತನಾಡಿ</p>
+            </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded-full hover:bg-white/20 transition-colors"
+            className="p-1.5 rounded-xl hover:bg-white/10 text-violet-200 hover:text-white transition-colors"
           >
             <X className="w-6 h-6" />
           </button>
         </div>
 
         {/* Mode Switcher */}
-        <div className="flex border-b border-gray-200 bg-gray-50">
+        <div className="flex bg-slate-100/80 p-1.5 border-b border-slate-200">
           <button
             onClick={() => { setMode('RECORD'); setQueryResponse(null); }}
-            className={`flex-1 py-3 text-center font-bold text-sm sm:text-base border-b-2 transition-colors ${
+            className={`flex-1 py-2.5 text-center font-black text-xs sm:text-sm rounded-2xl transition-all ${
               mode === 'RECORD'
-                ? 'border-brand-600 text-brand-700 bg-white'
-                : 'border-transparent text-gray-500 hover:text-gray-800'
+                ? 'bg-white text-violet-700 shadow-sm'
+                : 'text-slate-500 hover:text-slate-900'
             }`}
           >
             ಹೊಸ ಆರ್ಡರ್ / ಮಾಹಿತಿ
           </button>
           <button
             onClick={() => { setMode('QUERY'); resetForm(); }}
-            className={`flex-1 py-3 text-center font-bold text-sm sm:text-base border-b-2 transition-colors ${
+            className={`flex-1 py-2.5 text-center font-black text-xs sm:text-sm rounded-2xl transition-all ${
               mode === 'QUERY'
-                ? 'border-brand-600 text-brand-700 bg-white'
-                : 'border-transparent text-gray-500 hover:text-gray-800'
+                ? 'bg-white text-violet-700 shadow-sm'
+                : 'text-slate-500 hover:text-slate-900'
             }`}
           >
             ಪ್ರಶ್ನೆ ಕೇಳಿ (Search)
@@ -201,23 +209,23 @@ export const VoiceAssistantModal: React.FC<VoiceAssistantModalProps> = ({ isOpen
         {/* Content Body */}
         <div className="flex-1 overflow-y-auto p-5 space-y-4">
           
-          {/* Mic Button & Status */}
-          <div className="flex flex-col items-center justify-center py-4 space-y-3 bg-brand-50 rounded-2xl border border-brand-100">
+          {/* Radiant Jewel Mic Button & Status */}
+          <div className="flex flex-col items-center justify-center py-6 px-4 space-y-3 bg-gradient-to-b from-violet-50/60 via-purple-50/30 to-white rounded-3xl border border-violet-100 shadow-sm">
             <button
               type="button"
               onClick={isListening ? stopListening : startListening}
-              className={`w-20 h-20 rounded-full flex items-center justify-center shadow-lg transition-all ${
+              className={`w-20 h-20 rounded-full flex items-center justify-center shadow-glow-violet transition-all active:scale-90 ${
                 isListening
-                  ? 'bg-red-600 text-white animate-mic ring-4 ring-red-300'
-                  : 'bg-emerald-600 hover:bg-emerald-700 text-white ring-4 ring-emerald-200'
+                  ? 'bg-gradient-to-tr from-rose-600 to-red-600 text-white animate-mic ring-4 ring-rose-200'
+                  : 'bg-gradient-to-tr from-violet-600 via-indigo-600 to-purple-700 hover:from-violet-700 hover:to-indigo-800 text-white ring-4 ring-violet-200'
               }`}
             >
-              {isListening ? <MicOff className="w-10 h-10" /> : <Mic className="w-10 h-10" />}
+              {isListening ? <MicOff className="w-9 h-9" /> : <Mic className="w-9 h-9 text-amber-200" />}
             </button>
             
-            <p className="font-semibold text-gray-700">
+            <p className="font-bold text-sm text-slate-700">
               {isListening ? (
-                <span className="text-red-600 animate-pulse font-bold">
+                <span className="text-rose-600 animate-pulse font-black">
                   ಕೇಳಿಸಿಕೊಳ್ಳುತ್ತಿದೆ... ಈಗ ಮಾತನಾಡಿ
                 </span>
               ) : (
@@ -226,13 +234,13 @@ export const VoiceAssistantModal: React.FC<VoiceAssistantModalProps> = ({ isOpen
             </p>
 
             {/* Live Transcript / Manual input */}
-            <div className="w-full px-4">
+            <div className="w-full px-2">
               <input
                 type="text"
                 value={transcript}
                 onChange={(e) => setTranscript(e.target.value)}
                 placeholder={mode === 'RECORD' ? 'ಉದಾ: ಲಕ್ಷ್ಮಿ ಎರಡು ಬ್ಲೌಸ್, ಒಟ್ಟು ಸಾವಿರ...' : 'ಉದಾ: ಇವತ್ತು ಎಷ್ಟು ಹಣ ಬಂತು?'}
-                className="w-full text-center bg-white border border-gray-300 rounded-xl px-4 py-2 text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-500 shadow-sm"
+                className="w-full text-center bg-white border border-slate-300 rounded-2xl px-4 py-2.5 text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-violet-500 shadow-sm"
               />
             </div>
             
@@ -242,7 +250,7 @@ export const VoiceAssistantModal: React.FC<VoiceAssistantModalProps> = ({ isOpen
                 type="button"
                 onClick={() => handleProcessSpeech(transcript)}
                 disabled={isProcessing}
-                className="px-5 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-lg text-sm font-bold flex items-center space-x-1.5 shadow"
+                className="px-6 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white rounded-xl text-xs font-black flex items-center space-x-1.5 shadow-glow-violet transition-all active:scale-95"
               >
                 {isProcessing ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />}
                 <span>ಪರಿಶೀಲಿಸಿ (Process)</span>
@@ -252,52 +260,55 @@ export const VoiceAssistantModal: React.FC<VoiceAssistantModalProps> = ({ isOpen
 
           {/* Voice Errors or browser warnings */}
           {voiceError && (
-            <div className="flex items-center space-x-2 p-3 bg-amber-50 text-amber-800 rounded-xl text-sm border border-amber-200">
-              <AlertCircle className="w-5 h-5 flex-shrink-0" />
+            <div className="flex items-center space-x-2 p-3.5 bg-amber-50 text-amber-900 rounded-2xl text-xs font-semibold border border-amber-200">
+              <AlertCircle className="w-5 h-5 flex-shrink-0 text-amber-600" />
               <span>{voiceError}</span>
             </div>
           )}
 
           {errorMessage && (
-            <div className="flex items-center space-x-2 p-3 bg-red-50 text-red-800 rounded-xl text-sm border border-red-200">
-              <AlertCircle className="w-5 h-5 flex-shrink-0" />
+            <div className="flex items-center space-x-2 p-3.5 bg-rose-50 text-rose-900 rounded-2xl text-xs font-semibold border border-rose-200">
+              <AlertCircle className="w-5 h-5 flex-shrink-0 text-rose-600" />
               <span>{errorMessage}</span>
             </div>
           )}
 
           {/* QUERY MODE RESULT */}
           {mode === 'QUERY' && queryResponse && (
-            <div className="p-4 bg-emerald-50 border-2 border-emerald-300 rounded-xl space-y-2">
-              <div className="flex items-center justify-between text-emerald-800">
-                <span className="font-bold flex items-center space-x-1">
+            <div className="p-4 bg-gradient-to-br from-emerald-50 to-teal-50 border-2 border-emerald-300 rounded-2xl space-y-2.5 shadow-sm">
+              <div className="flex items-center justify-between text-emerald-900">
+                <span className="font-black flex items-center space-x-1.5 text-sm">
                   <Volume2 className="w-5 h-5 text-emerald-600" />
                   <span>ಉತ್ತರ:</span>
                 </span>
                 <button
                   onClick={() => speakText(queryResponse)}
-                  className="text-xs bg-emerald-200 hover:bg-emerald-300 text-emerald-900 font-bold px-2 py-1 rounded-md"
+                  className="text-xs bg-emerald-200 hover:bg-emerald-300 text-emerald-950 font-black px-2.5 py-1 rounded-lg transition-colors"
                 >
                   ಧ್ವನಿ ಕೇಳಿ
                 </button>
               </div>
-              <p className="text-lg font-semibold text-gray-900">{queryResponse}</p>
+              <p className="text-base font-extrabold text-slate-900">{queryResponse}</p>
             </div>
           )}
 
           {/* RECORD MODE: EXTRACTED DRAFT CARD */}
           {mode === 'RECORD' && (customerName || garments.length > 0 || totalAmount) && (
-            <div className="bg-white border-2 border-brand-200 rounded-xl p-4 space-y-3 shadow-md">
-              <div className="flex items-center justify-between border-b pb-2">
-                <h3 className="font-bold text-gray-900 text-base">ಗುರುತಿಸಲಾದ ವಿವರಗಳು (Extracted)</h3>
-                <span className="text-xs bg-brand-100 text-brand-800 px-2 py-0.5 rounded-full font-bold">
+            <div className="bg-white border-2 border-violet-200 rounded-3xl p-4.5 space-y-3.5 shadow-md">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
+                <h3 className="font-black text-slate-900 text-sm sm:text-base flex items-center space-x-1.5">
+                  <span>ಗುರುತಿಸಲಾದ ವಿವರಗಳು</span>
+                  <Sparkles className="w-4 h-4 text-amber-500" />
+                </h3>
+                <span className="text-[11px] bg-violet-100 text-violet-800 px-2.5 py-0.5 rounded-full font-black">
                   ಕರಡು #{draftId || 'ಹೊಸದು'}
                 </span>
               </div>
 
               {/* Ambiguity Resolution Alert */}
               {isAmbiguous && matchedCustomers.length > 0 && (
-                <div className="p-3 bg-amber-50 border border-amber-300 rounded-lg space-y-2">
-                  <p className="text-xs font-bold text-amber-900">
+                <div className="p-3 bg-amber-50 border border-amber-300 rounded-2xl space-y-2">
+                  <p className="text-xs font-black text-amber-950">
                     ⚠️ '{customerName}' ಹೆಸರಿನಲ್ಲಿ ಹಲವು ಗ್ರಾಹಕರಿದ್ದಾರೆ. ದಯವಿಟ್ಟು ಆಯ್ಕೆಮಾಡಿ:
                   </p>
                   <div className="grid grid-cols-1 gap-1.5">
@@ -310,14 +321,14 @@ export const VoiceAssistantModal: React.FC<VoiceAssistantModalProps> = ({ isOpen
                           setCustomerName(c.name);
                           setIsAmbiguous(false);
                         }}
-                        className={`text-left p-2 rounded border text-xs font-semibold flex justify-between items-center ${
+                        className={`text-left p-2.5 rounded-xl border text-xs font-bold flex justify-between items-center transition-all ${
                           customerId === c.id
-                            ? 'bg-brand-600 text-white border-brand-700'
-                            : 'bg-white hover:bg-amber-100 border-gray-300 text-gray-800'
+                            ? 'bg-violet-600 text-white border-violet-700 shadow-sm'
+                            : 'bg-white hover:bg-amber-100/70 border-slate-200 text-slate-800'
                         }`}
                       >
                         <span>{c.name} ({c.phone || 'ಫೋನ್ ಇಲ್ಲ'})</span>
-                        <span className="text-amber-800 font-bold">ಬಾಕಿ: ₹{c.outstanding_balance}</span>
+                        <span className="text-amber-800 font-black">ಬಾಕಿ: ₹{c.outstanding_balance}</span>
                       </button>
                     ))}
                   </div>
@@ -326,7 +337,7 @@ export const VoiceAssistantModal: React.FC<VoiceAssistantModalProps> = ({ isOpen
 
               {/* Customer Field */}
               <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1">ಗ್ರಾಹಕರ ಹೆಸರು</label>
+                <label className="block text-xs font-bold text-slate-700 mb-1">ಗ್ರಾಹಕರ ಹೆಸರು</label>
                 <input
                   type="text"
                   value={customerName}
@@ -334,19 +345,19 @@ export const VoiceAssistantModal: React.FC<VoiceAssistantModalProps> = ({ isOpen
                     setCustomerName(e.target.value);
                     setCustomerId(null);
                   }}
-                  className="w-full border rounded-lg px-3 py-2 text-sm font-semibold"
+                  className="w-full border border-slate-300 rounded-xl px-3 py-2 text-sm font-bold text-slate-900 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-violet-500"
                   placeholder="ಗ್ರಾಹಕರ ಹೆಸರು ನಮೂದಿಸಿ"
                 />
               </div>
 
               {/* Garment Items List */}
               <div>
-                <div className="flex items-center justify-between mb-1">
-                  <label className="text-xs font-bold text-gray-700">ಬಟ್ಟೆಗಳ ವಿವರ</label>
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="text-xs font-bold text-slate-700">ಬಟ್ಟೆಗಳ ವಿವರ</label>
                   <button
                     type="button"
                     onClick={() => setGarments([...garments, { garment_name: 'ಬ್ಲೌಸ್', quantity: 1 }])}
-                    className="text-xs text-brand-700 font-bold flex items-center space-x-1"
+                    className="text-xs text-violet-700 font-black flex items-center space-x-1 hover:underline"
                   >
                     <Plus className="w-3.5 h-3.5" />
                     <span>ಬಟ್ಟೆ ಸೇರಿಸಿ</span>
@@ -354,7 +365,7 @@ export const VoiceAssistantModal: React.FC<VoiceAssistantModalProps> = ({ isOpen
                 </div>
                 <div className="space-y-1.5">
                   {garments.map((g, idx) => (
-                    <div key={idx} className="flex items-center space-x-2 bg-gray-50 p-2 rounded-lg border">
+                    <div key={idx} className="flex items-center space-x-2 bg-slate-50 p-2 rounded-xl border border-slate-200">
                       <select
                         value={g.garment_name}
                         onChange={(e) => {
@@ -362,7 +373,7 @@ export const VoiceAssistantModal: React.FC<VoiceAssistantModalProps> = ({ isOpen
                           updated[idx].garment_name = e.target.value;
                           setGarments(updated);
                         }}
-                        className="flex-1 bg-white border rounded px-2 py-1 text-sm font-semibold"
+                        className="flex-1 bg-white border border-slate-300 rounded-lg px-2 py-1.5 text-xs sm:text-sm font-bold"
                       >
                         {GARMENT_OPTIONS.map((opt) => (
                           <option key={opt} value={opt}>{opt}</option>
@@ -377,12 +388,12 @@ export const VoiceAssistantModal: React.FC<VoiceAssistantModalProps> = ({ isOpen
                           updated[idx].quantity = parseInt(e.target.value) || 1;
                           setGarments(updated);
                         }}
-                        className="w-16 bg-white border rounded px-2 py-1 text-sm text-center font-bold"
+                        className="w-16 bg-white border border-slate-300 rounded-lg px-2 py-1.5 text-xs sm:text-sm text-center font-black"
                       />
                       <button
                         type="button"
                         onClick={() => setGarments(garments.filter((_, i) => i !== idx))}
-                        className="text-red-500 hover:text-red-700 p-1"
+                        className="text-rose-500 hover:text-rose-700 p-1"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -392,46 +403,46 @@ export const VoiceAssistantModal: React.FC<VoiceAssistantModalProps> = ({ isOpen
               </div>
 
               {/* Amounts Grid */}
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 gap-2.5">
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">ಒಟ್ಟು ಮೊತ್ತ (₹)</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">ಒಟ್ಟು ಮೊತ್ತ (₹)</label>
                   <input
                     type="number"
                     value={totalAmount}
                     onChange={(e) => setTotalAmount(e.target.value)}
                     placeholder="ಉದಾ: 1000"
-                    className="w-full border rounded-lg px-3 py-2 text-sm font-bold text-emerald-700"
+                    className="w-full border border-slate-300 rounded-xl px-3 py-2 text-sm font-black text-emerald-700 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-violet-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">ಅಡ್ವಾನ್ಸ್ ಹಣ (₹)</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">ಅಡ್ವಾನ್ಸ್ ಹಣ (₹)</label>
                   <input
                     type="number"
                     value={advanceAmount}
                     onChange={(e) => setAdvanceAmount(e.target.value)}
                     placeholder="ಉದಾ: 500"
-                    className="w-full border rounded-lg px-3 py-2 text-sm font-bold text-blue-700"
+                    className="w-full border border-slate-300 rounded-xl px-3 py-2 text-sm font-black text-violet-700 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-violet-500"
                   />
                 </div>
               </div>
 
               {/* Delivery Date */}
               <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1">ವಿತರಣಾ ದಿನಾಂಕ</label>
+                <label className="block text-xs font-bold text-slate-700 mb-1">ವಿತರಣಾ ದಿನಾಂಕ</label>
                 <input
                   type="date"
                   value={deliveryDate}
                   onChange={(e) => setDeliveryDate(e.target.value)}
-                  className="w-full border rounded-lg px-3 py-2 text-sm font-medium"
+                  className="w-full border border-slate-300 rounded-xl px-3 py-2 text-sm font-bold bg-slate-50 focus:bg-white focus:outline-none"
                 />
               </div>
             </div>
           )}
 
           {/* Sample Prompts Hint */}
-          <div className="bg-gray-50 rounded-xl p-3 border border-gray-200">
-            <p className="text-xs font-bold text-gray-600 mb-1 flex items-center space-x-1">
-              <HelpCircle className="w-3.5 h-3.5" />
+          <div className="bg-slate-50 rounded-2xl p-3.5 border border-slate-200">
+            <p className="text-xs font-black text-slate-600 mb-1.5 flex items-center space-x-1">
+              <HelpCircle className="w-3.5 h-3.5 text-violet-600" />
               <span>ಹೀಗೆ ಮಾತನಾಡಬಹುದು:</span>
             </p>
             <div className="flex flex-wrap gap-1.5">
@@ -443,7 +454,7 @@ export const VoiceAssistantModal: React.FC<VoiceAssistantModalProps> = ({ isOpen
                     setTranscript(cmd);
                     handleProcessSpeech(cmd);
                   }}
-                  className="text-xs bg-white hover:bg-brand-50 border border-gray-300 rounded-full px-2.5 py-1 text-gray-700 hover:border-brand-300 transition-colors"
+                  className="text-xs bg-white hover:bg-violet-50 border border-slate-200 hover:border-violet-300 rounded-full px-3 py-1 text-slate-700 font-medium transition-colors"
                 >
                   "{cmd}"
                 </button>
@@ -454,13 +465,13 @@ export const VoiceAssistantModal: React.FC<VoiceAssistantModalProps> = ({ isOpen
         </div>
 
         {/* Modal Footer Actions */}
-        <div className="p-4 bg-gray-100 border-t border-gray-200 flex space-x-3">
+        <div className="p-4 bg-slate-50 border-t border-slate-200 flex space-x-3">
           <button
             type="button"
             onClick={onClose}
-            className="flex-1 py-3 px-4 bg-white hover:bg-gray-200 text-gray-700 rounded-xl font-bold text-base border border-gray-300 transition-colors"
+            className="flex-1 py-3 px-4 bg-white hover:bg-slate-100 text-slate-700 rounded-2xl font-black text-sm border border-slate-200 transition-colors"
           >
-            ರದ್ದುಮಾಡಿ (Cancel)
+            ರದ್ದುಮಾಡಿ
           </button>
           
           {mode === 'RECORD' && (
@@ -468,14 +479,14 @@ export const VoiceAssistantModal: React.FC<VoiceAssistantModalProps> = ({ isOpen
               type="button"
               onClick={handleConfirmOrder}
               disabled={isProcessing || (!customerName && !customerId)}
-              className={`flex-1 py-3 px-4 rounded-xl font-bold text-base text-white shadow-lg flex items-center justify-center space-x-2 transition-all ${
+              className={`flex-1 py-3 px-4 rounded-2xl font-black text-sm text-white shadow-lg flex items-center justify-center space-x-2 transition-all ${
                 isProcessing || (!customerName && !customerId)
-                  ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-brand-600 hover:bg-brand-700 active:scale-95'
+                  ? 'bg-slate-300 text-slate-500 cursor-not-allowed shadow-none'
+                  : 'bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 shadow-glow-violet active:scale-95'
               }`}
             >
               {isProcessing ? <RefreshCw className="w-5 h-5 animate-spin" /> : <Check className="w-5 h-5" />}
-              <span>ಖಚಿತಪಡಿಸಿ ಉಳಿಸಿ (Save)</span>
+              <span>ಖಚಿತಪಡಿಸಿ ಉಳಿಸಿ</span>
             </button>
           )}
         </div>

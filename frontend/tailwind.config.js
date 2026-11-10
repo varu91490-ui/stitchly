@@ -8,25 +8,32 @@ export default {
     extend: {
       colors: {
         brand: {
-          50: '#fdf4f4',
-          100: '#fbe8e8',
-          200: '#f8d5d5',
-          300: '#f2b5b5',
-          400: '#e88888',
-          500: '#db5858',
-          600: '#c53d3d',
-          700: '#a52f2f',
-          800: '#892929',
-          900: '#732727',
-          950: '#3e1111',
+          50: '#f5f3ff',
+          100: '#ede9fe',
+          200: '#ddd6fe',
+          300: '#c4b5fd',
+          400: '#a78bfa',
+          500: '#8b5cf6',
+          600: '#7c3aed', // Royal Violet
+          700: '#6d28d9',
+          800: '#5b21b6',
+          900: '#4c1d95',
+          950: '#2e1065',
         },
         kannada: {
-          gold: '#FF9933',
-          red: '#CC0000',
+          gold: '#f59e0b',
+          amber: '#d97706',
+          emerald: '#10b981',
+          rose: '#f43f5e',
         }
       },
       fontFamily: {
         sans: ['"Noto Sans Kannada"', 'system-ui', '-apple-system', 'sans-serif'],
+      },
+      boxShadow: {
+        'glow-violet': '0 0 25px -5px rgba(124, 58, 237, 0.4)',
+        'glow-emerald': '0 0 25px -5px rgba(16, 185, 129, 0.4)',
+        'glow-amber': '0 0 25px -5px rgba(245, 158, 11, 0.4)',
       }
     },
   },
