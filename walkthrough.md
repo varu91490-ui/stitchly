@@ -64,40 +64,10 @@ Production-ready, mobile-first web application designed specifically for a small
   - **ಖರ್ಚುಗಳು (Expenses)**: Shop expense tracker.
   - **ವರದಿಗಳು (Reports)**: Daily and monthly financial reports with print/PDF export.
 
----
 
-## 🧪 Verification & Automated Test Results
 
-### Backend Automated Test Suite (`pytest`)
-All 12 automated unit and integration tests passed with 100% success:
 
-```powershell
-backend/tests/test_auth.py::test_register_user PASSED                    [  8%]
-backend/tests/test_auth.py::test_login_user PASSED                       [ 16%]
-backend/tests/test_auth.py::test_get_me PASSED                           [ 25%]
-backend/tests/test_customers.py::test_create_customer PASSED             [ 33%]
-backend/tests/test_customers.py::test_create_customer_without_phone PASSED [ 41%]
-backend/tests/test_customers.py::test_search_customer_by_kannada_name PASSED [ 50%]
-backend/tests/test_expenses_reports.py::test_expenses_and_dashboard_summary PASSED [ 58%]
-backend/tests/test_kannada_voice_nlp.py::test_kannada_voice_nlp_multi_step_flow PASSED [ 66%]
-backend/tests/test_orders_pricing.py::test_garment_wise_pricing_order PASSED [ 75%]
-backend/tests/test_orders_pricing.py::test_combined_pricing_order PASSED [ 83%]
-backend/tests/test_payments_balance.py::test_advance_and_partial_payments PASSED [ 91%]
-backend/tests/test_payments_balance.py::test_payment_correction PASSED   [100%]
 
-======================= 12 passed in 5.10s ========================
-```
-
-### Frontend Production Build (`npm run build`)
-```
-✓ 2106 modules transformed.
-dist/index.html                   1.23 kB
-dist/assets/index-C17gcE_8.css   27.90 kB
-dist/assets/index-BsLPneo0.js   372.90 kB
-✓ built in 1.22s
-```
-
----
 
 ## 🏃 How to Run Locally
 
