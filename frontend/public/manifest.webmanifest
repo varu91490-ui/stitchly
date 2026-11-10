@@ -1,0 +1,18 @@
+{
+  "name": "ನನ್ನ ಟೈಲರಿಂಗ್ ಖಾತೆ",
+  "short_name": "ಟೈಲರಿಂಗ್ ಖಾತೆ",
+  "description": "ಕನ್ನಡ ಧ್ವನಿ ಆಧಾರಿತ ಟೈಲರಿಂಗ್ ವ್ಯಾಪಾರ ಮತ್ತು ಲೆಕ್ಕಪತ್ರ ನಿರ್ವಹಣೆ",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#c53d3d",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/scissors.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
