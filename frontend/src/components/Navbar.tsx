@@ -1,16 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Users, ShoppingBag, Truck, Receipt, BarChart3, LogOut, Mic } from 'lucide-react';
+import { LayoutDashboard, Users, ShoppingBag, Truck, BarChart3, Mic, RefreshCw } from 'lucide-react';
 import { APP_NAME } from '../constants/kannada';
 
 interface NavbarProps {
   onOpenVoice: () => void;
-  userName?: string;
-  onLogout: () => void;
   isOffline: boolean;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenVoice, userName, onLogout, isOffline }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onOpenVoice, isOffline }) => {
   return (
     <>
       {/* Top Header */}
@@ -20,15 +18,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenVoice, userName, onLogout,
             <span className="text-2xl">✂️</span>
             <div>
               <h1 className="text-lg sm:text-xl font-extrabold tracking-wide">{APP_NAME}</h1>
-              {userName && (
-                <p className="text-xs text-brand-200">
-                  ಖಾತೆದಾರರು: <span className="font-bold text-white">{userName}</span>
-                </p>
-              )}
+              <p className="text-xs text-brand-200">
+                ಕನ್ನಡ ಧ್ವನಿ ಆಧಾರಿತ ಟೈಲರಿಂಗ್ ಲೆಕ್ಕಪತ್ರ
+              </p>
             </div>
           </div>
 
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2">
             {isOffline && (
               <span className="bg-amber-400 text-amber-950 text-xs px-2.5 py-1 rounded-full font-bold shadow animate-pulse">
                 ಆಫ್‌ಲೈನ್ (Offline)
@@ -36,11 +32,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenVoice, userName, onLogout,
             )}
             
             <button
-              onClick={onLogout}
-              title="ಲಾಗ್‌ಔಟ್ (Logout)"
+              onClick={() => window.location.reload()}
+              title="ರೀಫ್ರೆಶ್ ಮಾಡಿ (Refresh)"
               className="p-2 rounded-xl bg-brand-800 hover:bg-brand-900 text-brand-100 hover:text-white transition-colors"
             >
-              <LogOut className="w-5 h-5" />
+              <RefreshCw className="w-5 h-5" />
             </button>
           </div>
         </div>
@@ -59,7 +55,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenVoice, userName, onLogout,
         </button>
       </div>
 
-      {/* Bottom Navigation Bar (Thumb Friendly Mobile Layout) */}
+      {/* Bottom Navigation Bar */}
       <nav className="fixed bottom-0 left-0 right-0 z-30 bg-white border-t border-gray-200 shadow-lg">
         <div className="max-w-4xl mx-auto flex justify-around items-center h-16 px-1">
           

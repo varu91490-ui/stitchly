@@ -50,8 +50,8 @@ def client(db_session):
 @pytest.fixture(scope="function")
 def test_user(db_session):
     user = User(
-        name="ಅಮ್ಮ (Mother)",
-        username="mother_tailor",
+        name="ಖಾತೆದಾರರು",
+        username="shop_owner",
         password_hash=get_password_hash("testpass123")
     )
     db_session.add(user)

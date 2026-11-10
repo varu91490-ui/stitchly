@@ -9,7 +9,6 @@ export function setAuthToken(token: string): void {
 }
 
 export function removeAuthToken(): void {
-  localStorage.setItem('stitchly_token', '');
   localStorage.removeItem('stitchly_token');
 }
 
@@ -25,17 +24,14 @@ export async function request<T>(endpoint: string, options: RequestInit = {}): P
     headers.set('Authorization', `Bearer ${token}`);
   }
 
-  const response = await fetch(`${BASE_URL}${endpoint}`, {
-    ...options,
-    headers,
-  });
-
-  if (response.status === 401) {
-    removeAuthToken();
-    if (!window.location.pathname.includes('/login')) {
-      window.location.href = '/login';
-    }
-    throw new Error('ದೃಢೀಕರಣ ಮುಕ್ತಾಯಗೊಂಡಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಲಾಗಿನ್ ಮಾಡಿ.');
+  let response: Response;
+  try {
+    response = await fetch(`${BASE_URL}${endpoint}`, {
+      ...options,
+      headers,
+    });
+  } catch (err) {
+    throw new Error('ಬ್ಯಾಕೆಂಡ್ ಸರ್ವರ್ ಸಂಪರ್ಕವಾಗಿಲ್ಲ (Failed to fetch). ದಯವಿಟ್ಟು ಬ್ಯಾಕೆಂಡ್ ರನ್ ಆಗುತ್ತಿದೆಯೇ ಎಂದು ಪರಿಶೀಲಿಸಿ (Port 8000).');
   }
 
   if (!response.ok) {

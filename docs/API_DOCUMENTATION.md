@@ -13,7 +13,7 @@ Creates a new tailoring shop user.
 - **Request Body**:
 ```json
 {
-  "name": "ಲಕ್ಷ್ಮಿ ಅಮ್ಮ",
+  "name": "ಲಕ್ಷ್ಮಿ ಟೈಲರ್ಸ್",
   "username": "lakshmi_tailors",
   "password": "securepassword123"
 }
@@ -24,7 +24,7 @@ Creates a new tailoring shop user.
   "access_token": "eyJhbGciOiJIUzI1NiIs...",
   "token_type": "bearer",
   "user_id": 1,
-  "name": "ಲಕ್ಷ್ಮಿ ಅಮ್ಮ",
+  "name": "ಲಕ್ಷ್ಮಿ ಟೈಲರ್ಸ್",
   "username": "lakshmi_tailors"
 }
 ```

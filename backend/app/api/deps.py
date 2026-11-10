@@ -1,32 +1,38 @@
-from typing import Generator, Optional
-from fastapi import Depends, HTTPException, status
+from typing import Optional
+from fastapi import Depends
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.core.security import decode_access_token
 from app.models.user import User
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login", auto_error=False)
+
+def get_default_owner(db: Session) -> User:
+    user = db.query(User).first()
+    if not user:
+        user = User(
+            name="ಟೈಲರಿಂಗ್ ಖಾತೆದಾರರು",
+            username="shop_owner",
+            password_hash="single_user_mode"
+        )
+        db.add(user)
+        db.commit()
+        db.refresh(user)
+    return user
 
 def get_current_user(
     db: Session = Depends(get_db),
-    token: str = Depends(oauth2_scheme)
+    token: Optional[str] = Depends(oauth2_scheme)
 ) -> User:
-    credentials_exception = HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="ದೃಢೀಕರಣ ವಿಫಲವಾಗಿದೆ. ದಯವಿಟ್ಟು ಲಾಗಿನ್ ಮಾಡಿ (Could not validate credentials)",
-        headers={"WWW-Authenticate": "Bearer"},
-    )
-    payload = decode_access_token(token)
-    if payload is None:
-        raise credentials_exception
-    user_id: Optional[str] = payload.get("sub")
-    if user_id is None:
-        raise credentials_exception
-    try:
-        user = db.query(User).filter(User.id == int(user_id)).first()
-    except Exception:
-        raise credentials_exception
-    if user is None:
-        raise credentials_exception
-    return user
+    if token:
+        payload = decode_access_token(token)
+        if payload and payload.get("sub"):
+            try:
+                user = db.query(User).filter(User.id == int(payload["sub"])).first()
+                if user:
+                    return user
+            except Exception:
+                pass
+    # In single-user mode, automatically use the shop owner account
+    return get_default_owner(db)
