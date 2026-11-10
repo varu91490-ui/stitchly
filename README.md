@@ -42,9 +42,7 @@
 
 - **Frontend**: React 18, TypeScript, Vite, Tailwind CSS, Lucide React, React Router.
 - **Backend**: Python 3.11, FastAPI, Pydantic v2, SQLAlchemy ORM, Alembic, Uvicorn.
-- **Database**: 
-  - Local Environment: Oracle SQL 21c XE / MySQL 8.0.
-  - Production: Managed MySQL (Render / Aiven / PlanetScale).
+- **Database**: MySQL 8.0 (Local MySQL Server & Cloud Managed MySQL).
 - **Authentication**: JWT, Argon2/Bcrypt password hashing, ownership checks.
 - **Voice Recognition**: Dual-layer architecture (Web Speech API `kn-IN` + server-side audio fallback & Kannada NLP parser).
 

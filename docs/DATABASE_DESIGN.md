@@ -3,7 +3,7 @@
 ## 1. Overview
 The database architecture for "ನನ್ನ ಟೈಲರಿಂಗ್ ಖಾತೆ" is designed around relational integrity, precision financial accounting (using `DECIMAL(10, 2)` / `NUMBER(10, 2)`), full Kannada Unicode (UTF-8 / AL32UTF8), and non-destructive audit logs.
 
-The schema natively supports **both MySQL 8.0 (Production / Cloud hosting)** and **Oracle SQL 21c (Local development)** via SQLAlchemy ORM and Alembic migrations.
+The schema natively runs on **MySQL 8.0** via SQLAlchemy ORM and Alembic migrations.
 
 ---
 

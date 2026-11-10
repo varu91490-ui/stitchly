@@ -6,9 +6,8 @@ Production-ready, mobile-first web application designed specifically for a small
 
 ## 🚀 Key Modules Implemented
 
-### 1. Dual-Database Relational Architecture (MySQL Production + Oracle Local)
-- **Local Environment**: Automatically connected and initialized on your local **Oracle SQL 21c XE** instance (`system/varudbms`) using SQLAlchemy ORM.
-- **Production Environment**: Fully configured and ready for **Managed MySQL** (Render, Aiven, PlanetScale, TiDB) with Alembic database migrations.
+### 1. Relational Database Architecture (MySQL 8.0)
+- **Local & Production**: Connected and initialized on **MySQL Server 8.0.46** with native `utf8mb4` Kannada Unicode character set and precision `DECIMAL(10, 2)` financial calculations.
 - **Relational Tables**:
   - `users`: Shop owner credentials with native Bcrypt password hashing.
   - `customers`: Kannada Unicode customer directory with phone and notes.

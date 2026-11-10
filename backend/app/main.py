@@ -14,10 +14,10 @@ from app.api.v1.reports import router as reports_router
 from app.api.v1.voice import router as voice_router
 from app.api.v1.drafts import router as drafts_router
 
-# Auto-create tables on startup (works across MySQL, Oracle XE, SQLite)
+# Auto-create tables on startup (MySQL 8.0)
 try:
     Base.metadata.create_all(bind=engine)
-    print("Database tables initialized successfully.")
+    print("Database tables initialized successfully in MySQL.")
 except Exception as e:
     print(f"Notice: Table auto-creation encountered: {e}")
 
